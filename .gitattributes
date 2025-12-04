@@ -1,0 +1,7 @@
+# Tell GitHub to ignore the dist directory for language detection
+dist/* linguist-vendored
+*.js linguist-vendored
+
+# Explicitly identify TypeScript files
+*.ts linguist-language=TypeScript
+*.tsx linguist-language=TypeScript
