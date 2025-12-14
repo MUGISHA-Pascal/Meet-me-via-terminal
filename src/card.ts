@@ -39,12 +39,98 @@ ${chalk.bold.cyan("MUGISHA Pascal - Business Card")}
 ${chalk.gray("Usage: npx mugishapascal [option]")}
 
 ${chalk.bold.magenta("Options:")}
-  --email      Display email address
-  --phone      Display phone number
-  --github     Display GitHub profile
-  --linkedin   Display LinkedIn profile
-  --help       Show this help message
+  --email         Display email address
+  --phone         Display phone number
+  --github        Display GitHub profile
+  --linkedin      Display LinkedIn profile
+  --all           Display all contact info (JSON format)
+  --social        Display social media links (JSON format)
+  --card          Display compact card format
+  --ascii         Display ASCII art name (magenta)
+  --random-color  Display card with random color theme
+  --version       Display version information
+  --help          Show this help message
       `);
+      process.exit(0);
+    case "--all":
+      const allInfo = {
+        name: "MUGISHA Pascal",
+        role: "Software engineer",
+        email: emailValue,
+        phone: numberValue,
+        github: githubValue,
+        linkedin: linkedinValue,
+      };
+      console.log(JSON.stringify(allInfo, null, 2));
+      process.exit(0);
+    case "--version":
+      console.log("2.0.6");
+      process.exit(0);
+    case "--social":
+      const socialLinks = {
+        github: githubValue,
+        linkedin: linkedinValue,
+      };
+      console.log(JSON.stringify(socialLinks, null, 2));
+      process.exit(0);
+    case "--card":
+      const compactCard = `${chalk.bold.cyan(
+        "MUGISHA Pascal"
+      )} | ${chalk.yellow("Software engineer")}
+${chalk.blue(emailValue)} | ${chalk.blue(numberValue)}
+${chalk.yellow(githubValue)}
+${chalk.yellow(linkedinValue)}`;
+      console.log(compactCard);
+      process.exit(0);
+    case "--ascii":
+      const asciiArt = figlet.textSync("MUGISHA", {
+        horizontalLayout: "default",
+        verticalLayout: "default",
+      });
+      console.log(chalk.magenta(asciiArt));
+      process.exit(0);
+    case "--random-color":
+      const colorOptions = [
+        "red",
+        "green",
+        "yellow",
+        "blue",
+        "magenta",
+        "cyan",
+      ];
+      const selectedColor =
+        colorOptions[Math.floor(Math.random() * colorOptions.length)];
+      const randomColoredAscii = figlet.textSync("MUGISHA", {
+        horizontalLayout: "default",
+        verticalLayout: "default",
+      });
+      let coloredText = randomColoredAscii;
+      if (selectedColor === "red") coloredText = chalk.red(randomColoredAscii);
+      else if (selectedColor === "green")
+        coloredText = chalk.green(randomColoredAscii);
+      else if (selectedColor === "yellow")
+        coloredText = chalk.yellow(randomColoredAscii);
+      else if (selectedColor === "blue")
+        coloredText = chalk.blue(randomColoredAscii);
+      else if (selectedColor === "magenta")
+        coloredText = chalk.magenta(randomColoredAscii);
+      else if (selectedColor === "cyan")
+        coloredText = chalk.cyan(randomColoredAscii);
+
+      const coloredOutput = `${coloredText}
+${chalk.bold.green("role")}         : ${role} 
+${chalk.bold.green("phone number")} : ${number} 
+${chalk.bold.green("email")}        : ${email} 
+${chalk.bold.green("linkedin")}     : ${linkedin} 
+${chalk.bold.green("github")}       : ${github} 
+`;
+      const coloredFrame = boxen(coloredOutput, {
+        padding: 1,
+        borderStyle: "round",
+        margin: 1,
+        borderColor: selectedColor as any,
+      });
+      console.log(coloredFrame);
       process.exit(0);
   }
 }
