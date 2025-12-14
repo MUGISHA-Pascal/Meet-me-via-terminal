@@ -26,6 +26,7 @@
     "figlet": "^1.7.0"
   },
   "devDependencies": {
+    "@types/figlet": "^1.7.0",
     "@types/node": "^20.11.28",
     "typescript": "^5.3.3"
   }
