@@ -8,8 +8,8 @@
     "mugishapascal": "./dist/card.js"
   },
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/card.js",
+    "build": "node init && tsc",
+    "start": "node init && node dist/card.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
